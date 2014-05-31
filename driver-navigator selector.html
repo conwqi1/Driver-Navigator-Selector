@@ -1,60 +1,157 @@
 <html>
   <head>
-  <titile>driver-navigator selector</title>
-  </head>
-
-  <body>
-    <h2>what is your names?</h2>
-    Person1 name:<input type="text" id="Person1Name"><br>
-    Person2 name:<input type="text" id="Person2Name"><br>
-    <h2>What is your comfort level with this topic from 1 to 10? Enter it below(Integer only)<h2/><br>
-    Person 1 Enter Here: <input type="text" id="Person1"><br>
-    Person 2 Enter Here: <input type="text"  id="Person2"><br>
-
-    <h2>How are you feeling today from 1 to 10?</h2><br/>
-    Person 1 Enter Here: <input type="text" id="feeling1"><br/>
-    Person 2 Enter Here: <input type="text" id="feeling2"><br/>
-    
-    <button type="button" onclick="decideTheDriver();">Decide it</button>
-    <h2>The driver is:</h2><br>
-    <textarea rows="1" cols="25" id="output"></textarea>
-      
-        
-
-<!--<form action="demo_form.asp" novalidate>
-E-mail: <input type="email" name="user_email">
-<input type="submit">
-</form>-->
-
-<!--get
+    <title>Driver-Navigator Selector</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!--get
 var bla = $('#txt_name').val();
 //set
 $('#txt_name').val('bla');-->
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script>
- 
-  function decideTheDriver(){
-   var Person1Name=$('#Person1Name').val();
-  var Person2Name=document.getElementById('Person2Name').value;
-  var Person1= parseInt(document.getElementById('Person1').value) + parseInt(document.getElementById('feeling1').value);
-  var Person2= parseInt(document.getElementById('Person2').value) + parseInt(document.getElementById('feeling2').value);
-  if (Person1== ""  || Person2== "" ||Person1Name== "" ||Person2Name== ""){
-    alert("Please enter your score!")
-    }
-  else if (Person1>Person2) {
-           document.getElementById('output').value=Person1Name;
-  }else if(Person1==Person2) {
-          if (Math.random() < .5) {
-              document.getElementById('output').value=Person1Name;
-      }  else{
-              document.getElementById('output').value=Person2Name;
-  };
-        }
-  else{
-      document.getElementById('output').value=Person2Name;
-  };
-  };
-</script>
-</body>
-</html>
+    <style>
+      header {
+        margin: 0 auto;
+      }
 
+      header h1 {
+        text-align: center;
+      }
+
+      #main {
+        width: 650px;
+        margin: 0 auto;
+      }
+
+      #p1 {
+        margin: 10px;
+        display: inline-block;
+        float: left;
+        height: 500px;
+        width: 300px;
+        background-color: lightgray;
+        border-radius: 15px;
+      }
+
+      #p2 {
+         margin: 10px;
+        display: inline-block;
+        float: right;
+        height: 500px;
+        width: 300px;
+      background-color: lightgray;
+      border-radius: 15px;
+    }
+
+  #verdict {
+      margin: 0 auto;
+      width: 630px;
+    height: 150px;
+    background-color: gray;
+    clear: both;
+    border-radius: 15px;
+  }
+    </style>
+  </head>
+  <body>
+
+    <header>
+      <h1>Driver-Navigator Selector</h1>
+    </header>
+
+    <div id="main">
+      <div id="p1">
+        <form action="">
+          <h3>What is your name?</h3>
+          Name: <input type="text" name="name" id="Person1Name"><br />
+          <h3>What is your comfort level with this topic?</h3>
+          Level: <select type="text" id="Person1">
+             <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select><br />
+          <h3>What is your energy level?</h3>
+          Energy: <select type="text" id="feeling1">
+             <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select><br />
+        </form> 
+      </div>
+
+      <div id="p2">
+        <form action="">
+          <h3>What is your name?</h3>
+          Name: <input type="text" name="name" id="Person2Name"><br />
+          <h3>What is your comfort level with this topic?</h3>
+          Level: <select type="text"  id="Person2">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select><br />
+          <h3>What is your energy level?</h3>
+          Energy: <select type="text" id="feeling2">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select><br />
+        </form> 
+      </div>
+
+      <div id="verdict">
+          <button type="button" onclick="decideTheDriver();">Decide it</button>
+          <h2>The driver is:</h2><br>
+          <textarea rows="1" cols="25" id="output"></textarea>
+      </div>
+    </div>
+    <script>
+ 
+    function decideTheDriver() {
+      var Person1Name = $('#Person1Name').val();
+      var Person2Name = $('#Person2Name').val();
+      var Person1 = parseInt($('#Person1').val()) + parseInt($('#feeling1').val());
+      var Person2 = parseInt($('#Person2').val()) + parseInt($('#feeling2').val());
+      console.log(Person1 > Person2);
+      if (Person1 == ""  || Person2 == "" || Person1Name == "" || Person2Name == "") {
+        alert("Please enter your score!")
+      }
+      else if(Person1 > Person2) {
+        $('#output').val(Person1Name);
+      }
+      else if(Person1 == Person2) {
+        if (Math.random() < .5) {
+          $('#output').val(Person1Name);
+        }
+      }
+      else {
+        $('#output').val(Person2Name);
+      }
+      };
+    </script>
+  </body>
+</html>
