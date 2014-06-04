@@ -1,7 +1,7 @@
 <html>
   <head>
     <title>Driver-Navigator Selector</title>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <!--get
 var bla = $('#txt_name').val();
 //set
@@ -124,7 +124,7 @@ $('#txt_name').val('bla');-->
       </div>
 
       <div id="verdict">
-          <button type="button" onclick="decideTheDriver();">Decide it</button>
+          <button type="button" onclick="decideTheDriver();" id="decide">Decide it</button>
           <h2>The driver is:</h2><br>
           <textarea rows="1" cols="25" id="output"></textarea>
       </div>
@@ -152,6 +152,32 @@ $('#txt_name').val('bla');-->
         $('#output').val(Person2Name);
       }
       };
+    </script>
+    <script>
+    $("#decide").click(function(){
+      $.ajax("api/data.php", {
+        type: 'POST',
+        data: {
+        Person1:{
+          PersonName:$('#Person1Name').val(),
+          level:$('#Person1').val(),
+          feeling:$('#feeling1').val()
+          },
+         Person2:{
+          PersonName:$('#Person2Name').val(),
+          level:$('#Person2').val(),
+          feeling:$('#feeling2').val()
+          }
+        },
+        success:function(data){
+          console.log(data);
+        },
+        error:function(data){
+         console.log('fail');
+        }
+
+      })
+    });
     </script>
   </body>
 </html>
